@@ -14,7 +14,7 @@ int mcd(int n,int d)
   N=abs(n);
   D=abs(d);
   R=D%N;
-  if(!R) return N;
+  if(!R) goto fin;
 #ifdef PRELIMINAR
   printf("%d = %d(%d)+%d\n",D,D/N,N,R);
 #endif /*PRELIMINAR*/

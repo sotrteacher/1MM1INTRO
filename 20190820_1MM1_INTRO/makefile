@@ -5,7 +5,8 @@ FUENTES:=mcd.c main.c otro.c
 CC=gcc
 LDFLAGS+=-lm
 
-all:$(EXE) $(EJECUTABLE)
+#all:$(EXE) $(EJECUTABLE)
+all:$(EXE) 
 $(EXE):$(OBJETOS)
 	$(CC) $(LDFLAGS) $(OBJETOS) -o $@
 $(OBJETOS):$(FUENTES)
