@@ -1,5 +1,6 @@
 /*porvalor_porreferencia.c*/
 #include <stdio.h>
+#include "mostrar.h"
 //void mostrar(float valor1,valor2); /*revisar en libro de Zhirkov*/
 /* Hola a tod@s, como les coment\'e que lo har\'ia, revis\'e el 
  * libro Low Level Programming de Igor Zhirkov, en busca de una 
@@ -26,16 +27,17 @@ void intercambiar(float A,float B)
   tmp=A;
   A=B;
   B=tmp;
-  mostrar(A,B);
+  mostrar1(A,B);
 }
 
+/*paso de argumentos por referencia*/
 void intercambiar1(float *A,float *B)
 {
   float tmp;
   tmp=*A;
   *A=*B;
   *B=tmp;
-  mostrar(*A,*B);
+  mostrar1(*A,*B);
 }
 
 
@@ -44,16 +46,21 @@ int main(int argc,char *argv[])
   float x,y;
   x=1.4142;
   y=3.1416;
-  mostrar(x,y);
+  printf("\nmain:\n");
+  mostrar1(x,y);
   printf("\n/***********************************************/\n");
   printf("\n");
+  printf("intercambiar:\n");
   intercambiar(x,y);/*paso de argumentos por valor*/
-  printf("\n");
-  mostrar(x,y);
+  printf("\nmain:\n");
+  mostrar1(x,y);
   printf("\n/***********************************************/\n");
-  intercambiar1(&x,&y);/*paso de argumentos por referencia*/
   printf("\n");
-  mostrar(x,y);
+  printf("intercambiar1:\n");
+  intercambiar1(&x,&y);/*paso de argumentos por referencia*/
+  printf("\nmain:\n");
+  mostrar1(x,y);
+  printf("\n/***********************************************/\n");
   return 0;
 }/*end main()*/
 
@@ -63,4 +70,7 @@ void mostrar(float valor1,float valor2)
          "valor1 =",valor1,"valor2 =",valor2);
 }
 
-
+void print_float(float f)
+{
+  printf("%10.4f",f);
+}

@@ -7,7 +7,7 @@ CC=gcc
 LDFLAGS+=-lm
 
 #all:$(EXE) $(EJECUTABLE)
-all:$(EXE) 
+all:$(EXE) por_valor_y_por_referencia.exe
 $(EXE):$(OBJETOS)
 	$(CC) $(LDFLAGS) $(OBJETOS) -o $@
 $(OBJETOS):$(FUENTES)
