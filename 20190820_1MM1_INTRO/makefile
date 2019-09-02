@@ -18,5 +18,5 @@ $(EJECUTABLE):main.o file.o
 por_valor_y_por_referencia.exe:porvalor_porreferencia.c
 	$(CC) $< -o $@
 clean:
-	rm -v $(OBJETOS) $(EXE) $(EJECUTABLE) file.o
+	rm -v $(OBJETOS) $(EXE) por_valor_y_por_referencia.exe
 
