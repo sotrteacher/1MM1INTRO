@@ -1,5 +1,6 @@
 /*porvalor_porreferencia.c*/
 #include <stdio.h>
+#include <stdlib.h>   /*atoi()*/
 #include "mostrar.h"
 //void mostrar(float valor1,valor2); /*revisar en libro de Zhirkov*/
 /* Hola a tod@s, como les coment\'e que lo har\'ia, revis\'e el 
@@ -40,26 +41,31 @@ void intercambiar1(float *A,float *B)
   mostrar1(*A,*B);
 }
 
+static char X[]="2019";
+static char Y[]="09";
+static char Z[]="02";
 
 int main(int argc,char *argv[])
 {
   float x,y;
   x=1.4142;
   y=3.1416;
+  printf("Version: ");
+  VERSION(X,Y,Z);
   printf("\nmain:\n");
-  mostrar1(x,y);
+  mostrar2(float,x,y);
   printf("\n/***********************************************/\n");
   printf("\n");
   printf("intercambiar:\n");
   intercambiar(x,y);/*paso de argumentos por valor*/
   printf("\nmain:\n");
-  mostrar1(x,y);
+  mostrar2(float,x,y);
   printf("\n/***********************************************/\n");
   printf("\n");
   printf("intercambiar1:\n");
   intercambiar1(&x,&y);/*paso de argumentos por referencia*/
   printf("\nmain:\n");
-  mostrar1(x,y);
+  mostrar2(float,x,y);
   printf("\n/***********************************************/\n");
   return 0;
 }/*end main()*/
