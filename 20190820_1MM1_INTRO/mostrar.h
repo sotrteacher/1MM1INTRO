@@ -5,7 +5,7 @@ printf("%10s",cadena(y));printf(" = %10.4f  ",y);
 
 static void show_int(int);
 static void show_float(float);
-#define formar(tipo)	show##_##tipo
+//#define formar(tipo)	show##_##tipo
 #define mostrar2(tipo,x,y)	\
 printf("%10s",cadena(x));show##_##tipo(x);\
 printf("%10s",cadena(y));show##_##tipo(y);
