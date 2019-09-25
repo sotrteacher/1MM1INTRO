@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="1MM1INTRO" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/1MM1INTRO" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/1MM1INTRO" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="20190820_1MM1_INTRO/file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="20190820_1MM1_INTRO/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="20190820_1MM1_INTRO/mcd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="20190820_1MM1_INTRO/mostrar.h" />
+		<Unit filename="20190820_1MM1_INTRO/otro.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="20190820_1MM1_INTRO/porvalor_porreferencia.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="20190903_1MM1_INTRO/funcion.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="20190903_1MM1_INTRO/testprintbin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="20190906_1MM1_INTRO_pista_prac01/segundos_a_formato.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="practica_1/codigo 1iva.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
