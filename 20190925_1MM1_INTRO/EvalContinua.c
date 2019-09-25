@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>
+#include <time.h>
 
-extern unsigned int NUMDREAC;           /*NUMero De REACtivos*/
-extern unsigned int LONGDREAC;          /*LONGitud De REACTivo*/
+/*extern const unsigned int NUMDREAC;*/           /*NUMero De REACtivos*/
+/*extern const unsigned int LONGDREAC;*/          /*LONGitud De REACTivo*/
+const unsigned int NUMDREAC=52;           /*NUMero De REACtivos*/
+const unsigned int LONGDREAC=2048;          /*LONGitud De REACTivo*/
 extern char REACTIVO[NUMDREAC][LONGDREAC];
 extern unsigned int cantidad_de_reactivos_usados;
 /*must point to cantidad_de_reactivos_usados unsigned int*/
@@ -22,7 +25,7 @@ int show_reactivo(unsigned int index)
   return 0;
 }/*end show_reactivo(unsigned int index)*/
 
-int siguiente_turno(){
+unsigned int siguiente_turno(){
   int candidato_a_ser_reactivo_en_turno;
   if(cantidad_de_reactivos_usados==NUMDREAC){
     modificado=false;
@@ -36,6 +39,7 @@ unsigned int usar_NUMDREAC_buckets();
   if(cantidad_de_reactivos_usados<NUMDREAC){
     srand(time(NULL));
     candidato_a_ser_reactivo_en_turno=1+rand()%NUMDREAC;
+bool asignado(unsigned int);
     while(asignado(candidato_a_ser_reactivo_en_turno)){
       candidato_a_ser_reactivo_en_turno=1+rand()%NUMDREAC;
     }
@@ -65,12 +69,12 @@ unsigned int usar_NUMDREAC_buckets()
 
 void actualizar_reactivos_usados(unsigned int reactivo_en_uso)
 {
-  unsigned int i,*tmp=(int *)malloc(cantidad_de_reactivos_usados*sizeof(usnsigned int));
+  unsigned int i,*tmp=(unsigned int *)malloc(cantidad_de_reactivos_usados*sizeof(unsigned int));
   for(i=0;i<cantidad_de_reactivos_usados;i++){
     *(tmp+i)=reactivos_usados[i];
   }
   reactivos_usados=(unsigned int *)malloc(
-                   (cantidad_de_reactivos_usados+1)sizeof(unsigned int));
+                   (cantidad_de_reactivos_usados+1)*sizeof(unsigned int));
   for(i=0;i<cantidad_de_reactivos_usados;i++){
     reactivos_usados[i]=*(tmp+i);
   }
@@ -79,4 +83,18 @@ void actualizar_reactivos_usados(unsigned int reactivo_en_uso)
   modificado=true;
 }
 
+/** Devuelve true si candidato est\'a entre los reactivos usados.
+ *  y devuelve false en caso contrario.
+ *  @param candidato:debe ser un candidato_a_ser_reactivo_en_turno.
+ */ 
+bool asignado(unsigned int candidato)
+{
+  unsigned int i;
+  for(i=0;i<cantidad_de_reactivos_usados;i++){
+    if(*(reactivos_usados+i)==candidato){
+      return true;
+    }
+  }
+  return false;
+}/*end bool asignado(unsigned int)*/
 
