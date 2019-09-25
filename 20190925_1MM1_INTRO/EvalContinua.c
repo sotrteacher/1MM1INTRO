@@ -4,10 +4,13 @@
 #include <assert.h>
 #include <time.h>
 
-/*extern const unsigned int NUMDREAC;*/           /*NUMero De REACtivos*/
-/*extern const unsigned int LONGDREAC;*/          /*LONGitud De REACTivo*/
-const unsigned int NUMDREAC=52;           /*NUMero De REACtivos*/
-const unsigned int LONGDREAC=2048;          /*LONGitud De REACTivo*/
+/*extern const unsigned int NUMDREAC; */          /*NUMero De REACtivos*/
+/*extern const unsigned int LONGDREAC;  */        /*LONGitud De REACTivo*/
+/*const unsigned int NUMDREAC=52;  */         /*NUMero De REACtivos*/
+/*const unsigned int LONGDREAC=2048;*/          /*LONGitud De REACTivo*/
+#define NUMDREAC	52
+#define LONGDREAC	2048
+
 extern char REACTIVO[NUMDREAC][LONGDREAC];
 extern unsigned int cantidad_de_reactivos_usados;
 /*must point to cantidad_de_reactivos_usados unsigned int*/
@@ -45,8 +48,8 @@ bool asignado(unsigned int);
     }
     reactivo_en_turno=candidato_a_ser_reactivo_en_turno;
     assert(reactivo_en_turno<=NUMDREAC);
-actualizacion:
 void actualizar_reactivos_usados(unsigned int);
+actualizacion:
     actualizar_reactivos_usados(reactivo_en_turno);
   }
   return reactivo_en_turno;
