@@ -1,0 +1,8 @@
+FORMA DE USO:
+./test_EvalContinua_Intro.exe index_reactivos_intro.txt
+
+Los archivos que contienen los reactivos deben estar en el 
+directorio llamado:
+reactivos 
+y deben llamarse reactivo1.txt, reactivo2.txt, ..., reactivoN.txt
+
