@@ -5,15 +5,26 @@
 //#define NDEBUG
 #include <assert.h>
 #include <stdlib.h>
+#include <time.h>    /*time_t time(),tm localtime()*/
 #include "intervalos.h"
+#include "gettingdate.h"
+extern char day_name[][32];
+extern char month_name[][32];
 
 int main(int argc,char *argv[])
 {
   int n=2;
+  unsigned int mindex,dindex; /*mONTH index,dAY index*/
+  time_t now=time(0);
+  tm *ltm=localtime(&now);
   struct fecha f1;
-  f1.d=4;
-  f1.m=10;
-  f1.a=2019;
+  f1.d=get_day(ltm);
+  f1.m=get_month(ltm);
+  f1.a=get_year(ltm);
+  mindex=f1.m;
+  dindex=calc_day_name(&f1);
+  printf("%s %d de %s de %d\n",
+         day_name[dindex],f1.d,month_name[mindex],f1.a);
   struct disponibilidad Ddf1;
   Ddf1.cant_de_interv=n;
   Ddf1.intervPt=(struct intervalo*)malloc( 

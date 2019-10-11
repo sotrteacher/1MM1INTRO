@@ -25,5 +25,10 @@ struct intervalos_en_la_fecha{
   struct fecha F;            /* fecha */     
   struct disponibilidad D;   /* intervalos disponibles en la fecha F */
 };
+//extern char day_name[][32];  /* nombres de los d\'ias de la semana */
+//extern char month_name[][32];/* nombres de los meses del a\~no */
+
+unsigned int calc_day_name(struct fecha *fechaPt);
+
 #endif /*INTERVALOS_H*/
 

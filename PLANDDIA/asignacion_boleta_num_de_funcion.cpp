@@ -37,9 +37,9 @@ int main(int argc,char *argv[])
     sprintf(centinela,"#define DISC%d",num_de_funcion);
   }
   if(num_de_funcion<10){
-    sprintf(centinela1,"#ifndef DISC0%d",num_de_funcion);
+    sprintf(centinela1,"#ifdef DISC0%d",num_de_funcion);
   }else{
-    sprintf(centinela1,"#define DISC%d",num_de_funcion);
+    sprintf(centinela1,"#ifde%d",num_de_funcion);
   }
   sprintf(file_boleta,"%d.c",NumDBoleta);
   if(num_de_funcion<10){
