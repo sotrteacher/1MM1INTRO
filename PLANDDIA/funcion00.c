@@ -5,12 +5,15 @@
 #include "intervalos.h"
 #define DISC00
 
-#ifndef DISC00
+#ifdef DISC00
 /*Stub*/
 void
 print_intervalos_en_la_fecha(struct 
 intervalos_en_la_fecha *p){
-
+  if(p->D.cant_de_interv){
+    printf("%s\t%s\n",p->D.intervPt->inicio,
+           p->D.intervPt->final);
+  }
 }
 #else
 void

@@ -23,7 +23,7 @@ int main(int argc,char *argv[])
   f1.a=get_year(ltm);
   mindex=f1.m;
   dindex=calc_day_name(&f1);
-  printf("%s %d de %s de %d\n",
+  printf("M\\'exico, %s %d de %s de %d\n",
          day_name[dindex],f1.d,month_name[mindex],f1.a);
   struct disponibilidad Ddf1;
   Ddf1.cant_de_interv=n;

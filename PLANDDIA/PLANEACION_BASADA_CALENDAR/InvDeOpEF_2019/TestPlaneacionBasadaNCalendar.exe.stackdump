@@ -1,0 +1,8 @@
+Exception: STATUS_ACCESS_VIOLATION at eip=5EA085C1
+eax=00416174 ebx=0000000C ecx=00000001 edx=00000054 esi=8004E0C0 edi=00000000
+ebp=0040E15E esp=0063C770 program=C:\Users\LMC\00_UPIITA\00_Proyectos_Lenguaje_Cpp\01_Proyecto_Asignacion_de_Turno\1MM1INTRO\PLANDDIA\PLANEACION_BASADA_CALENDAR\InvDeOpEF_2019\TestPlaneacionBasadaNCalendar.exe, pid 2087, thread main
+cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
+Stack trace:
+Frame     Function  Args
+0040E15E  5EA085C1 (656E7265, 2E300073, 72502030, 6E657365)
+End of stack trace

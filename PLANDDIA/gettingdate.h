@@ -1,7 +1,8 @@
 #ifndef GETTINGDATE_H
 #define GETTINGDATE_H
 /**
- *#include <ctime>
+ *#include <ctime> para g++, y
+ *#include <time.h> para gcc
  *time_t now = time(0);
  *tm *ltm = localtime(&now);
  */

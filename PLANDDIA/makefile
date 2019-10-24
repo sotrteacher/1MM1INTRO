@@ -1,5 +1,5 @@
 EXE:=TestIntervalos.exe
-FUNCION00:=2016640238
+FUNCION00:=funcion00
 FUNCION01:=funcion01
 FUNCION02:=funcion02
 FUNCION03:=funcion03

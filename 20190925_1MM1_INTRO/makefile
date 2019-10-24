@@ -15,4 +15,4 @@ $(EXE1):$(FUENTES1)
 #clean:
 #	rm -v $(OBJETOS) $(OBJETOS1) $(EXE) $(EXE1)
 clean:
-	rm -v $(EXE) $(EXE1)
+	rm -v $(OBJETOS) $(EXE) $(EXE1)
