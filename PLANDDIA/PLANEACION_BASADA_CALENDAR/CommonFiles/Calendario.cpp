@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include <stdlib.h> /*malloc()*/
-//#define NDEBUG
+#define NDEBUG
 #include <assert.h>
 using std::string;
 using std::cout;
@@ -196,7 +196,8 @@ inic:
 #ifdef USING_ARREGLO
     if(esta_incluido(ARREGLO[im][id%7],dias)){
 #else
-    if(esta_incluido(Cal_Greg->get_day_name(fi),dias)){
+    //if(esta_incluido(Cal_Greg->get_day_name(fi),dias)){
+    if(esta_incluido(Cal_Greg->get_day_name(new Fecha(id,im)),dias)){
 #ifndef NDEBUG
   printf("La fecha %s %d de %s de %d SI ESTA INCLUIDA!\n"
         ,Cal_Greg->get_day_name(fi)
@@ -243,9 +244,24 @@ vector<Dia*> Calendario::get_Dias_DC(vector<Fecha*> vdf,vector<Dia*> dnl){
 }
 
 void Calendario::planear(vector<Dia*> DIA,vector<Actividad*> ACT){
-  int i=0,j=0;/*i para recorrer los dias y j para recorrer las actividades*/
+  /*i para recorrer los dias y j para recorrer las actividades*/
+  int i=0,j=0;
+  assert(DIA[i]!=NULL);
+  assert(ACT[j]!=NULL);
+#ifndef NDEBUG
+  printf("void Calendario::planear(vector<Dia*> DIA,vector<Actividad*> ACT)\n");
+#ifndef USING_ARREGLO
+  printf("i=%3d j=%3d: %s %d/%s/%d DIA[i]->TD=%5.2f ACT[j]->TR=%5.2f\n",
+         i,j,Cal_Greg->get_day_name(DIA[i]->f),DIA[i]->f->d,MES[DIA[i]->f->m],
+         DIA[i]->f->a,DIA[i]->TD,ACT[j]->TR);
+#endif /*USING_ARREGLO*/
+#endif /*NDEBUG*/
 inicio:
   if(ACT[j]->TR<=DIA[i]->TD){
+#ifndef NDEBUG
+  printf("i=%3d j=%3d: DIA[i]->TD=%5.2f ACT[j]->TR=%5.2f\n",
+         i,j,DIA[i]->TD,ACT[j]->TR);
+#endif /*NDEBUG*/
     DIA[i]->TD-=ACT[j]->TR;
 	if(ACT[j]->TR>0)
       DIA[i]->A.push_back(new Asignacion(ACT[j],ACT[j]->TR));
@@ -265,7 +281,8 @@ inicio:
   }
   if( !( (i==DIA.size())||(j==ACT.size()) ) )
     goto inicio;
-}
+}//end void Calendario::planear(vector<Dia*> DIA,vector<Actividad*> ACT)
+
 //
 //void Calendario::planear(vector<Dia*> DIA,vector<Actividad*> ACT,vector<Alumno*> Alum){
 //  int i=0,j=0;/*i para recorrer los dias y j para recorrer las actividades*/

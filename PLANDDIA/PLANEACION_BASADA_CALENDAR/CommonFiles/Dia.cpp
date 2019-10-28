@@ -20,9 +20,10 @@ using namespace std;
 #include "Calendario.h"         /*2019.10.20*/
 extern string ARREGLO[][7];
 extern string MONTH[];
+extern char MES[][32];
 extern int anio;
-/**2019.10.20 For backward compatibility, define USING_ARREGLO
- * at command in the make file.
+/**2019.10.20 If it is necessary, for backward compatibility, 
+ * define USING_ARREGLO at command in the make file.
  */ 
 ostream& operator<<(ostream& out,Dia& D){
 #ifdef USING_ARREGLO   
@@ -31,22 +32,27 @@ ostream& operator<<(ostream& out,Dia& D){
 #else
   Calendario *Cal_Greg=new Calendario();
 #ifndef NDEBUG
-  printf("%s",Cal_Greg->get_day_name(D.f));
-  printf(" %d ",D.f->d);
-  printf(" %s ",D.f->d);
-#endif 
-assert(1==0);
+//  printf("%s: \n",__FILE__);
+//assert(1==0);
+//  cout<<__FILE__<<": "<<__LINE__+1<<":";
+  printf("%s, line %d:D.f->d=%d, D.f->m=%d, D.f->a=%d\n",
+         __FILE__,__LINE__,D.f->d,D.f->m,D.f->a);
+  printf("\n%s, line %d, %s\n",__FILE__,__LINE__,Cal_Greg->get_day_name(D.f));
+assert((D.f->m>=1)&&(D.f->m<=12));
+assert((D.f->d>=1)&&(D.f->d<=31));
+#endif /*NDEBUG*/
   printf("%s %d de %s de %d\n",Cal_Greg->get_day_name(D.f)
                               ,D.f->d
-                              ,MONTH[D.f->m].c_str()
+                              ,MES[D.f->m]
                               ,anio);
   delete Cal_Greg;
 #endif /*USING_ARREGLO*/
   for(unsigned int i=0;i<D.A.size();i++){
     out<<*(D.A[i])<<endl;
   }
+//assert(1==0);
   return out;
-}
+}/*end ostream& operator<<(ostream& out,Dia& D)*/
 
 void Dia::set_TDT(float tdt){
   TD=TDT=tdt;
