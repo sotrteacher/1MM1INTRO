@@ -27,5 +27,7 @@ DiaA.o:../CommonFiles/Dia.cpp
 	$(CC)  -c $^ -o $@
 #test_Calendario.o:test_Calendario.cpp
 #	$(CC)  -c $^ -o $@
+Dummy.exe:dummy.o $(OBJETOSA)
+	$(CC) -o $@ $^
 clean:
 	rm -v *.o *.exe

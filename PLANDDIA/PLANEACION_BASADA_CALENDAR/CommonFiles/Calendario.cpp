@@ -376,18 +376,39 @@ Calendario::get_day_name(Fecha *f_Pt)
   int X,/*n\'umero a calcular*/
       D,/*n\'umero del d\'ia de la fecha*/
       M,/*c\'odigo del mes*/
-      A,/*n\'umero del a\~no (dos d\'igitos)*/
+ //     A,/*n\'umero del a\~no (dos d\'igitos)*/
       /*(1/4)A, cuarta parte del a\~no (divisi\'on entera)*/
+      Aover4, 
       S;/*c\'odigo del siglo*/
   f_Pt->a=anio;
   D=f_Pt->d;
   M=Month_Code[f_Pt->m-1];
-  A=f_Pt->a%100;
-  S=Century_Code(f_Pt->a);
-  X=D+M+A+A/4+S;
+//  A=f_Pt->a%100;
+//  A=
+//  S=Century_Code(f_Pt->a);
+int obtener_S(int);
+  S=obtener_S(f_Pt->a);
+int obtener_Aover4(int);
+  Aover4=obtener_Aover4(f_Pt->a);
+#ifndef NDEBUG
+  printf("D=%d\nM=%d\nS=%d\n",D,M,S);
+#endif /*NDEBUG*/
+  //X=D+M+A+A/4+S;
+  X=D+M+Aover4+S;
+#ifndef NDEBUG
+  printf("X=%d\n",X);
+#endif /*NDEBUG*/
   X=X%7;
   result=day_name[X];
   return result;
+}/*end Calendario::get_day_name(Fecha *f_Pt)*/
+
+/*Para obtener A*/
+int obtener_S(int a){
+  return (a-1)%7;
 }
 
+int obtener_Aover4(int a){
+  return ((a-1)/4-(3*((a-1)/100+1)/4))%7;
+}
 

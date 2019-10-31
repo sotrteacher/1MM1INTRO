@@ -19,6 +19,12 @@ using namespace std;
 #define NACT(name,duracion)	\
 VDA.push_back(new Actividad(name, duracion ## f ))
 
+/*Termina definici\'on de la macro NACT()*/
+
+#define NACTIV(name,duracion)	\
+VDActividades.push_back(new Actividad(name, duracion ## f ))
+
+/*Termina definici\'on de la macro NACTIV()*/
 
 int anio = 2019;
 Calendario *Cal_Greg;   /*Calendario Gregoriano*/
@@ -92,7 +98,7 @@ int main(int argc,char *argv[])
   vdnl.push_back(new Dia(new Fecha(12,12)));  /*Jueves 12 de diciembre de 2019*/
 #endif /*CAL_GREGORIANO*/
 #ifndef NDEBUG
-  /*Los siguientes dias deberian ser solamente Lunes y Martes (en este
+  /*Los siguientes dias deberian ser solamente Lunes y Viernes (en este
    *caso que se trata del semestre Agosto-Diciembre de 2019 y Enero-Febrero de 
    *2020)*/
    for(int i=0;i<VDF.size();i++){
@@ -204,10 +210,95 @@ int main(int argc,char *argv[])
 	for (unsigned int i = 0; i<VDDC.size(); i++) {
 		cout << *VDDC[i] << endl;
 	}
-assert(1==0);
+                   /*2019.10.29*/
 
-  delete Cal2019;
   delete Cal_Greg;
+  /*Ahora la planeaci\'on para enero y febrero de 2020*/
+  anio=2020;
+  Cal_Greg = new Calendario(2020);
+#ifndef NDEBUG
+  Fecha F(1,1,2020); /* 1 de enero de 2020 */
+  printf("%s %d de %s de %d\n",Cal_Greg->get_day_name(&F)
+                              ,F.d
+                              ,MES[F.m]
+                              ,2020);
+  for(i=1;i<=31;i++){
+    F.d=i;
+    printf("%15s %2d de %7s de %4d\n",Cal_Greg->get_day_name(&F)
+                                     ,F.d
+                                     ,MES[F.m]
+                                     ,2020);
+  }
+#endif /*NDEBUG*/
+  Fecha F1(6,1,2020); /*Lunes 6 de enero de 2020 */
+  Fecha F2(3,2,2020); /*Lunes 3 de febrero de 2020 */
+  /*vector de dias de la semana en que hay clases de la UA correspondiente*/
+  vector<string> VDD;   
+  VDD.push_back("Lunes");
+  VDD.push_back("Viernes");
+  /*vector con las Fechas entre F1 y F2 correspondientes a 
+   los dias en el vector VDD */
+  vector<Fecha*> VDFechas= Cal_Greg->get_Fechas(&F1,&F2,VDD); 
+#ifndef NDEBUG
+  printf("Los siguientes dias deberian ser solamente Lunes y Viernes (en este\
+   caso que se trata del semestre Agosto-Diciembre de 2019 y Enero-Febrero de\
+   2020)\n");
+   for(int i=0;i<VDFechas.size();i++){
+     printf("%s %d de %s de %d\n",Cal_Greg->get_day_name(VDFechas[i])
+                     ,VDFechas[i]->d
+                     ,MES[VDFechas[i]->m]
+                     ,VDFechas[i]->a);
+   }
+#endif /*NDEBUG*/
+  /*construir un vector de apuntadores a Dias no laborables*/
+  vector<Dia*> VDNL;
+  VDNL.push_back(new Dia(new Fecha(6,1,2020))); /*Lunes 6 de enero de 2020*/
+  VDNL.push_back(new Dia(new Fecha(3,2,2020))); /*Lunes 3 de febrero de 2020*/
+  /*Ahora usando el vector de Fechas VDFechas y el vector de Dias no 
+   laborables VDNL, construir un vector de Dias laborables (los dias de 
+   clase para los que se planificar\'an actividades) este vector de Dias 
+   laborables se obtendra pasando un mensaje al objeto de clase Calendario*/
+   /*obtener Vector De Dias de Clase,*/
+   vector<Dia*> VDDClase = Cal_Greg->get_Dias_DC(VDFechas,VDNL); 
+  /*Se asigna Tiempo Disponible Total segun el dia de que se trate*/
+  for (unsigned int i = 0; i < VDDClase.size(); i++){
+    if(!strcmp(Cal_Greg->get_day_name(VDDClase[i]->f),"Lunes")){
+      VDDClase[i]->set_TDT(2.0);
+    }
+    if(!strcmp(Cal_Greg->get_day_name(VDDClase[i]->f),"Viernes")){
+      VDDClase[i]->set_TDT(1.0);
+    }
+  }
+  /*Se necesita crear las actividades/temas a asignar en los
+  dias de clase disponibles. Se usa usa constructor de Actividad
+  pasando el nombre del Tema y la duracion del Tema/Actividad en horas.*/
+  vector<Actividad*> VDActividades;
+  NACTIV("V.K FORMULADO DE PROBLEMAS POR FLUJO M\\'AXIMO",2.0);
+  NACTIV("V.L PLANTEAMIENTO DE PROBLEMAS",2.0);
+  NACTIV("TERCERA EVALUACI\\'ON PARCIAL",2.0);
+  NACTIV("REVISI\\'ON DE LA TERCERA EVALUACI\\'ON PARCIAL", 1.0);
+  NACTIV("EVALUACI\\'ON FINAL ORDINARIA",2.0);
+  NACTIV("REVISI\\'ON DE LA FINAL ORDINARIA", 1.0);
+  /*Por ultimo se hace la planeacion pasando el vector de dias de 
+   clase y el vector de actividades*/
+  Cal_Greg->planear(VDDClase,VDActividades);
+  /*Finalmente se imprime en pantalla los dias a planear con las 
+  actividades correspondientes por dia de clase entre las fechas 
+  F1 y F2.*/
+  cout<<"Los dias a planificar en 2020 son:"<<endl;
+  for (unsigned int i = 0;i<VDDClase.size();i++) {
+  	cout<<*VDDClase[i]<<endl;
+  }
+assert(1==0);
+  delete Cal2019;  /*Borrar Calendario usado anteriormente*/
+  delete Cal_Greg; /*Borrar Calendario Gregoriano a usar de ahora 
+                     en m\'as. Lo ``nuevo'' en la clase del objeto
+                     Cal_Greg es el m\'etodo 
+                     (char [][32] get_day_name(Fecha*))*/
+                   /*En realidad, los dos objetos (Cal2019 y Cal_Greg) 
+                     son de clase Calendario, as\'i que en una 
+                     siguiente versi\'on planeo usar solo una variable 
+                     flobal de tipo Calendario*/ 
   return 0;
 }//end main()
 
